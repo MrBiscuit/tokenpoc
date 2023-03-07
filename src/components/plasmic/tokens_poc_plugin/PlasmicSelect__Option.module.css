@@ -1,14 +1,14 @@
 .root {
-  flex-direction: row;
   display: flex;
+  flex-direction: row;
   position: relative;
   height: 24px;
   padding: 8px 16px;
 }
 .root > :global(.__wab_flex-container) {
   flex-direction: row;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: flex-start;
   margin-left: calc(0px - 8px);
   width: calc(100% + 8px);
 }

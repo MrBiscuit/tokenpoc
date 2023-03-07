@@ -110,29 +110,27 @@ function PlasmicSelect__OptionGroup__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const currentUser = p.useCurrentUser?.() || {};
-
+  const [$queries, setDollarQueries] = React.useState({});
   const stateSpecs = React.useMemo(
     () => [
       {
         path: 'noTitle',
         type: 'private',
         variableType: 'variant',
-        initFunc: true ? ($props, $state, $ctx) => $props.noTitle : undefined,
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => $props.noTitle : undefined,
       },
 
       {
         path: 'isFirst',
         type: 'private',
         variableType: 'variant',
-        initFunc: true ? ($props, $state, $ctx) => $props.isFirst : undefined,
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => $props.isFirst : undefined,
       },
     ],
 
     [$props, $ctx]
   );
-  const $state = p.useDollarState(stateSpecs, $props, $ctx);
-
-  const [$queries, setDollarQueries] = React.useState({});
+  const $state = p.useDollarState(stateSpecs, { $props, $ctx, $queries });
 
   const superContexts = {
     Select: React.useContext(SUPER__PlasmicSelect.Context),

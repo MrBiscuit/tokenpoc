@@ -34,6 +34,7 @@ import {
 } from '@plasmicapp/react-web';
 import Select__Overlay from '../../Select__Overlay'; // plasmic-import: YdYhrXoxJA1/component
 import Select__Option from '../../Select__Option'; // plasmic-import: E75G9lmFSaD/component
+import Select__OptionGroup from '../../Select__OptionGroup'; // plasmic-import: VXo0N8loUAV/component
 
 import '@plasmicapp/react-web/lib/plasmic.css';
 
@@ -61,10 +62,11 @@ export type PlasmicSelect__ArgsType = {
   selectedContent?: React.ReactNode;
   placeholder?: React.ReactNode;
   children?: React.ReactNode;
-  value?: string;
+  value?: 'Dynamic options';
   name?: string;
   'aria-label'?: string;
   'aria-labelledby'?: string;
+  options?: any;
 };
 
 type ArgPropType = keyof PlasmicSelect__ArgsType;
@@ -75,7 +77,8 @@ export const PlasmicSelect__ArgProps = new Array<ArgPropType>(
   'value',
   'name',
   'aria-label',
-  'aria-labelledby'
+  'aria-labelledby',
+  'options'
 );
 
 export type PlasmicSelect__OverridesType = {
@@ -91,6 +94,7 @@ export type PlasmicSelect__OverridesType = {
 export interface DefaultSelectProps extends pp.BaseSelectProps {
   'aria-label'?: string;
   'aria-labelledby'?: string;
+  options?: any;
 }
 
 const PlasmicSelectContext = React.createContext<
@@ -133,36 +137,43 @@ function PlasmicSelect__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const currentUser = p.useCurrentUser?.() || {};
-
+  const [$queries, setDollarQueries] = React.useState({});
   const stateSpecs = React.useMemo(
     () => [
       {
         path: 'showPlaceholder',
         type: 'private',
         variableType: 'variant',
-        initFunc: true ? ($props, $state, $ctx) => $props.showPlaceholder : undefined,
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => $props.showPlaceholder : undefined,
       },
 
       {
         path: 'isOpen',
         type: 'private',
         variableType: 'variant',
-        initFunc: true ? ($props, $state, $ctx) => $props.isOpen : undefined,
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => $props.isOpen : undefined,
       },
 
       {
         path: 'isDisabled',
         type: 'private',
         variableType: 'variant',
-        initFunc: true ? ($props, $state, $ctx) => $props.isDisabled : undefined,
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => $props.isDisabled : undefined,
+      },
+
+      {
+        path: 'value',
+        type: 'writable',
+        variableType: 'text',
+
+        valueProp: 'value',
+        onChangeProp: 'onChange',
       },
     ],
 
     [$props, $ctx]
   );
-  const $state = p.useDollarState(stateSpecs, $props, $ctx);
-
-  const [$queries, setDollarQueries] = React.useState({});
+  const $state = p.useDollarState(stateSpecs, { $props, $ctx, $queries });
 
   const [isRootFocusVisibleWithin, triggerRootFocusVisibleWithinProps] = useTrigger('useFocusVisibleWithin', {
     isTextInput: false,
@@ -311,38 +322,27 @@ function PlasmicSelect__RenderFunc(props: {
 }
 
 function useBehavior<P extends pp.BaseSelectProps>(props: P, ref: pp.SelectRef) {
-  if (!('children' in props)) {
-    props = {
-      ...props,
-      children: (
-        <React.Fragment>
-          <Select__Option className={classNames('__wab_instance', sty.option__eGtuz)} value={'value1' as const}>
-            {'Option 1'}
-          </Select__Option>
-
-          <Select__Option className={classNames('__wab_instance', sty.option__gqFx)} value={'value2' as const}>
-            {'Option 2'}
-          </Select__Option>
-        </React.Fragment>
-      ),
-    };
-  }
-
   return pp.useSelect(
     PlasmicSelect,
     props,
     {
-      isOpenVariant: { group: 'isOpen', variant: 'isOpen' },
-      placeholderVariant: { group: 'showPlaceholder', variant: 'showPlaceholder' },
-      isDisabledVariant: { group: 'isDisabled', variant: 'isDisabled' },
-      triggerContentSlot: 'selectedContent',
-      optionsSlot: 'children',
-      placeholderSlot: 'placeholder',
-      root: 'root',
-      trigger: 'trigger',
-      overlay: 'overlay',
-      optionsContainer: 'optionsContainer',
+      ...{
+        isOpenVariant: { group: 'isOpen', variant: 'isOpen' },
+        placeholderVariant: { group: 'showPlaceholder', variant: 'showPlaceholder' },
+        isDisabledVariant: { group: 'isDisabled', variant: 'isDisabled' },
+        triggerContentSlot: 'selectedContent',
+        optionsSlot: 'children',
+        placeholderSlot: 'placeholder',
+        root: 'root',
+        trigger: 'trigger',
+        overlay: 'overlay',
+        optionsContainer: 'optionsContainer',
+      },
+      OptionComponent: Select__Option,
+      OptionGroupComponent: Select__OptionGroup,
+      itemsProp: 'options',
     },
+
     ref
   );
 }

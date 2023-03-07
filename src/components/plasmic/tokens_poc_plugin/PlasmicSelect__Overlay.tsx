@@ -108,22 +108,20 @@ function PlasmicSelect__Overlay__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const currentUser = p.useCurrentUser?.() || {};
-
+  const [$queries, setDollarQueries] = React.useState({});
   const stateSpecs = React.useMemo(
     () => [
       {
         path: 'relativePlacement',
         type: 'private',
         variableType: 'variant',
-        initFunc: true ? ($props, $state, $ctx) => $props.relativePlacement : undefined,
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => $props.relativePlacement : undefined,
       },
     ],
 
     [$props, $ctx]
   );
-  const $state = p.useDollarState(stateSpecs, $props, $ctx);
-
-  const [$queries, setDollarQueries] = React.useState({});
+  const $state = p.useDollarState(stateSpecs, { $props, $ctx, $queries });
 
   const superContexts = {
     Select: React.useContext(SUPER__PlasmicSelect.Context),

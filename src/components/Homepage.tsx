@@ -3,39 +3,51 @@
 import * as React from 'react';
 import { PlasmicHomepage, DefaultHomepageProps } from './plasmic/tokens_poc_plugin/PlasmicHomepage';
 import { HTMLElementRefOf } from '@plasmicapp/react-web';
+import Select__Option from './Select__Option';
+import {handleEvent, dispatch} from '../helpers/uiMessageHandler';
 
-// Your component props start with props for variants and slots you defined
-// in Plasmic, but you can add more here, like event handlers that you can
-// attach to named nodes in your component.
-//
-// If you don't want to expose certain variants or slots as a prop, you can use
-// Omit to hide them:
-//
-// interface HomepageProps extends Omit<DefaultHomepageProps, "hideProps1"|"hideProp2"> {
-//   // etc.
-// }
-//
-// You can also stop extending from DefaultHomepageProps altogether and have
-// total control over the props for your component.
 export interface HomepageProps extends DefaultHomepageProps {}
 
 function Homepage_(props: HomepageProps, ref: HTMLElementRefOf<'div'>) {
-  // Use PlasmicHomepage to render this component as it was
-  // designed in Plasmic, by activating the appropriate variants,
-  // attaching the appropriate event handlers, etc.  You
-  // can also install whatever React hooks you need here to manage state or
-  // fetch data.
-  //
-  // Props you can pass into PlasmicHomepage are:
-  // 1. Variants you want to activate,
-  // 2. Contents for slots you want to fill,
-  // 3. Overrides for any named node in the component to attach behavior and data,
-  // 4. Props to set on the root node.
-  //
-  // By default, we are just piping all HomepageProps here, but feel free
-  // to do whatever works for you.
 
-  return <PlasmicHomepage root={{ ref }} {...props} />;
+const [brand, setBrand] = React.useState('red');
+
+handleEvent('brand', (e) => {
+  setBrand(e);
+});
+
+  return <PlasmicHomepage root={{ ref }} {...props} 
+   brand={{
+    props:{
+      children:[
+        <Select__Option value="red" children="red" />,
+        <Select__Option value="green" children="green" />,
+        <Select__Option value="blue" children="blue" />,
+      ],
+      value: brand,
+      onChange: (e) => {
+        setBrand(e);
+        dispatch('brand', e);
+      }
+    }
+  }}
+  product={{
+    props:{
+      children:[
+        <Select__Option value="aaa" children="aaaa" />,
+        <Select__Option value="bbb" children="bbbb" />,
+      ]
+    }
+  }}
+  platform={{
+    props:{
+      children:[
+        <Select__Option value="zzzz" children="zzzzz" />,
+      ]
+    }
+    
+    
+  }}/>;
 }
 
 const Homepage = React.forwardRef(Homepage_);

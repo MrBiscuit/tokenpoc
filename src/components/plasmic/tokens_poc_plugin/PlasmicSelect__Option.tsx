@@ -114,36 +114,34 @@ function PlasmicSelect__Option__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const currentUser = p.useCurrentUser?.() || {};
-
+  const [$queries, setDollarQueries] = React.useState({});
   const stateSpecs = React.useMemo(
     () => [
       {
         path: 'isSelected',
         type: 'private',
         variableType: 'variant',
-        initFunc: true ? ($props, $state, $ctx) => $props.isSelected : undefined,
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => $props.isSelected : undefined,
       },
 
       {
         path: 'isHighlighted',
         type: 'private',
         variableType: 'variant',
-        initFunc: true ? ($props, $state, $ctx) => $props.isHighlighted : undefined,
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => $props.isHighlighted : undefined,
       },
 
       {
         path: 'isDisabled',
         type: 'private',
         variableType: 'variant',
-        initFunc: true ? ($props, $state, $ctx) => $props.isDisabled : undefined,
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => $props.isDisabled : undefined,
       },
     ],
 
     [$props, $ctx]
   );
-  const $state = p.useDollarState(stateSpecs, $props, $ctx);
-
-  const [$queries, setDollarQueries] = React.useState({});
+  const $state = p.useDollarState(stateSpecs, { $props, $ctx, $queries });
 
   const superContexts = {
     Select: React.useContext(SUPER__PlasmicSelect.Context),
@@ -174,6 +172,7 @@ function PlasmicSelect__Option__RenderFunc(props: {
         data-plasmic-name={'check'}
         data-plasmic-override={overrides.check}
         className={classNames(projectcss.all, sty.check, {
+          [sty.checkisHighlighted]: hasVariant($state, 'isHighlighted', 'isHighlighted'),
           [sty.checkisSelected]: hasVariant($state, 'isSelected', 'isSelected'),
         })}
         role={'img'}
@@ -183,6 +182,7 @@ function PlasmicSelect__Option__RenderFunc(props: {
         data-plasmic-name={'labelContainer'}
         data-plasmic-override={overrides.labelContainer}
         className={classNames(projectcss.all, sty.labelContainer, {
+          [sty.labelContainerisHighlighted]: hasVariant($state, 'isHighlighted', 'isHighlighted'),
           [sty.labelContainerisSelected]: hasVariant($state, 'isSelected', 'isSelected'),
         })}
       >

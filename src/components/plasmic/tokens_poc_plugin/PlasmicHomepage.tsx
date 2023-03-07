@@ -56,9 +56,15 @@ export const PlasmicHomepage__ArgProps = new Array<ArgPropType>();
 export type PlasmicHomepage__OverridesType = {
   root?: p.Flex<'div'>;
   section?: p.Flex<'section'>;
+  brand?: p.Flex<typeof Select>;
+  product?: p.Flex<typeof Select>;
+  platform?: p.Flex<typeof Select>;
   theme?: p.Flex<typeof Select>;
-  mode?: p.Flex<typeof Select>;
+  colorMode?: p.Flex<typeof Select>;
+  appearance?: p.Flex<typeof Select>;
   surface?: p.Flex<typeof Select>;
+  emphasis?: p.Flex<typeof Select>;
+  state?: p.Flex<typeof Select>;
   button?: p.Flex<typeof Button>;
 };
 
@@ -102,8 +108,76 @@ function PlasmicHomepage__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const currentUser = p.useCurrentUser?.() || {};
-
   const [$queries, setDollarQueries] = React.useState({});
+  const stateSpecs = React.useMemo(
+    () => [
+      {
+        path: 'brand.value',
+        type: 'private',
+        variableType: 'text',
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => undefined : undefined,
+      },
+
+      {
+        path: 'product.value',
+        type: 'private',
+        variableType: 'text',
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => undefined : undefined,
+      },
+
+      {
+        path: 'platform.value',
+        type: 'private',
+        variableType: 'text',
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => undefined : undefined,
+      },
+
+      {
+        path: 'theme.value',
+        type: 'private',
+        variableType: 'text',
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => undefined : undefined,
+      },
+
+      {
+        path: 'colorMode.value',
+        type: 'private',
+        variableType: 'text',
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => undefined : undefined,
+      },
+
+      {
+        path: 'appearance.value',
+        type: 'private',
+        variableType: 'text',
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => undefined : undefined,
+      },
+
+      {
+        path: 'surface.value',
+        type: 'private',
+        variableType: 'text',
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => undefined : undefined,
+      },
+
+      {
+        path: 'emphasis.value',
+        type: 'private',
+        variableType: 'text',
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => undefined : undefined,
+      },
+
+      {
+        path: 'state.value',
+        type: 'private',
+        variableType: 'text',
+        initFunc: true ? ({ $props, $state, $queries, $ctx }) => undefined : undefined,
+      },
+    ],
+
+    [$props, $ctx]
+  );
+  const $state = p.useDollarState(stateSpecs, { $props, $ctx, $queries });
 
   return (
     <React.Fragment>
@@ -138,9 +212,13 @@ function PlasmicHomepage__RenderFunc(props: {
               ) : null}
 
               <Select
-                data-plasmic-name={'theme'}
-                data-plasmic-override={overrides.theme}
-                className={classNames('__wab_instance', sty.theme)}
+                data-plasmic-name={'brand'}
+                data-plasmic-override={overrides.brand}
+                className={classNames('__wab_instance', sty.brand)}
+                onChange={(...args) => {
+                  p.generateStateOnChangeProp($state, ['brand', 'value'])(args[0]);
+                }}
+                value={p.generateStateValueProp($state, ['brand', 'value'])}
               >
                 <Select__Option className={classNames('__wab_instance', sty.option__ujBy0)} value={'1' as const}>
                   {'Option 1'}
@@ -161,16 +239,18 @@ function PlasmicHomepage__RenderFunc(props: {
 
               {true ? (
                 <div className={classNames(projectcss.all, sty.freeBox__hHc63)}>
-                  <div className={classNames(projectcss.all, projectcss.__wab_text, sty.text__u0RC1)}>
-                    {'Platform:'}
-                  </div>
+                  <div className={classNames(projectcss.all, projectcss.__wab_text, sty.text__u0RC1)}>{'Product:'}</div>
                 </div>
               ) : null}
 
               <Select
-                data-plasmic-name={'mode'}
-                data-plasmic-override={overrides.mode}
-                className={classNames('__wab_instance', sty.mode)}
+                data-plasmic-name={'product'}
+                data-plasmic-override={overrides.product}
+                className={classNames('__wab_instance', sty.product)}
+                onChange={(...args) => {
+                  p.generateStateOnChangeProp($state, ['product', 'value'])(args[0]);
+                }}
+                value={p.generateStateValueProp($state, ['product', 'value'])}
               >
                 <Select__Option className={classNames('__wab_instance', sty.option__gUt1X)} value={'1' as const}>
                   {'Option 1'}
@@ -190,17 +270,21 @@ function PlasmicHomepage__RenderFunc(props: {
               </Select>
 
               {true ? (
-                <div className={classNames(projectcss.all, sty.freeBox__uoFhi)}>
-                  <div className={classNames(projectcss.all, projectcss.__wab_text, sty.text__i977Q)}>
-                    {'Language:'}
+                <div className={classNames(projectcss.all, sty.freeBox__gKynm)}>
+                  <div className={classNames(projectcss.all, projectcss.__wab_text, sty.text__kApxm)}>
+                    {'Platform:'}
                   </div>
                 </div>
               ) : null}
 
               <Select
-                data-plasmic-name={'surface'}
-                data-plasmic-override={overrides.surface}
-                className={classNames('__wab_instance', sty.surface)}
+                data-plasmic-name={'platform'}
+                data-plasmic-override={overrides.platform}
+                className={classNames('__wab_instance', sty.platform)}
+                onChange={(...args) => {
+                  p.generateStateOnChangeProp($state, ['platform', 'value'])(args[0]);
+                }}
+                value={p.generateStateValueProp($state, ['platform', 'value'])}
               >
                 <Select__Option className={classNames('__wab_instance', sty.option__oQwH)} value={'1' as const}>
                   {'Option 1'}
@@ -234,6 +318,300 @@ function PlasmicHomepage__RenderFunc(props: {
                   {'Option 4'}
                 </Select__Option>
               </Select>
+
+              {true ? (
+                <div className={classNames(projectcss.all, sty.freeBox__uoFhi)}>
+                  <div className={classNames(projectcss.all, projectcss.__wab_text, sty.text__i977Q)}>{'Theme:'}</div>
+                </div>
+              ) : null}
+
+              <Select
+                data-plasmic-name={'theme'}
+                data-plasmic-override={overrides.theme}
+                className={classNames('__wab_instance', sty.theme)}
+                onChange={(...args) => {
+                  p.generateStateOnChangeProp($state, ['theme', 'value'])(args[0]);
+                }}
+                value={p.generateStateValueProp($state, ['theme', 'value'])}
+              >
+                <Select__Option className={classNames('__wab_instance', sty.option__iYnfN)} value={'1' as const}>
+                  {'Option 1'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__quHrz)} value={'2' as const}>
+                  {'Option 2'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__oQgt0)} value={'3' as const}>
+                  {'aswef.djv.hrueb.hir.efwef'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__vfr7V)} value={'45' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__qrRxv)} value={'6' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__deBiw)} value={'7' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__eiCeA)} value={'8' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__bqfUp)} value={'9' as const}>
+                  {'Option 4'}
+                </Select__Option>
+              </Select>
+
+              {true ? (
+                <div className={classNames(projectcss.all, sty.freeBox__rzZbu)}>
+                  <div className={classNames(projectcss.all, projectcss.__wab_text, sty.text__fdYLw)}>
+                    {'Color Mode:'}
+                  </div>
+                </div>
+              ) : null}
+
+              <Select
+                data-plasmic-name={'colorMode'}
+                data-plasmic-override={overrides.colorMode}
+                className={classNames('__wab_instance', sty.colorMode)}
+                onChange={(...args) => {
+                  p.generateStateOnChangeProp($state, ['colorMode', 'value'])(args[0]);
+                }}
+                value={p.generateStateValueProp($state, ['colorMode', 'value'])}
+              >
+                <Select__Option className={classNames('__wab_instance', sty.option__ychxL)} value={'1' as const}>
+                  {'Option 1'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option___8BJd3)} value={'2' as const}>
+                  {'Option 2'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__lTIs)} value={'3' as const}>
+                  {'aswef.djv.hrueb.hir.efwef'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__x68Au)} value={'45' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__ehjSn)} value={'6' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option___7WMtf)} value={'7' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__op29W)} value={'8' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option___0UbjH)} value={'9' as const}>
+                  {'Option 4'}
+                </Select__Option>
+              </Select>
+
+              {true ? (
+                <div className={classNames(projectcss.all, sty.freeBox__ev77Y)}>
+                  <div className={classNames(projectcss.all, projectcss.__wab_text, sty.text__vQRhh)}>
+                    {'Appearance:'}
+                  </div>
+                </div>
+              ) : null}
+
+              <Select
+                data-plasmic-name={'appearance'}
+                data-plasmic-override={overrides.appearance}
+                className={classNames('__wab_instance', sty.appearance)}
+                onChange={(...args) => {
+                  p.generateStateOnChangeProp($state, ['appearance', 'value'])(args[0]);
+                }}
+                value={p.generateStateValueProp($state, ['appearance', 'value'])}
+              >
+                <Select__Option className={classNames('__wab_instance', sty.option__kas1M)} value={'1' as const}>
+                  {'Option 1'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option___41MlK)} value={'2' as const}>
+                  {'Option 2'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__yCfJy)} value={'3' as const}>
+                  {'aswef.djv.hrueb.hir.efwef'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option___4HAgn)} value={'45' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__uf2L1)} value={'6' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option___8YaiN)} value={'7' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__ekdYv)} value={'8' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__j3UTc)} value={'9' as const}>
+                  {'Option 4'}
+                </Select__Option>
+              </Select>
+
+              {true ? (
+                <div className={classNames(projectcss.all, sty.freeBox__y2Cav)}>
+                  <div className={classNames(projectcss.all, projectcss.__wab_text, sty.text__yG6S3)}>{'Surface:'}</div>
+                </div>
+              ) : null}
+
+              <Select
+                data-plasmic-name={'surface'}
+                data-plasmic-override={overrides.surface}
+                className={classNames('__wab_instance', sty.surface)}
+                onChange={(...args) => {
+                  p.generateStateOnChangeProp($state, ['surface', 'value'])(args[0]);
+                }}
+                value={p.generateStateValueProp($state, ['surface', 'value'])}
+              >
+                <Select__Option className={classNames('__wab_instance', sty.option__fXnlm)} value={'1' as const}>
+                  {'Option 1'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__friMw)} value={'2' as const}>
+                  {'Option 2'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__cbEoo)} value={'3' as const}>
+                  {'aswef.djv.hrueb.hir.efwef'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__dmQbE)} value={'45' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__daZtQ)} value={'6' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__d3A7I)} value={'7' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__euV06)} value={'8' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__lVj7C)} value={'9' as const}>
+                  {'Option 4'}
+                </Select__Option>
+              </Select>
+
+              {true ? (
+                <div className={classNames(projectcss.all, sty.freeBox__cvtJy)}>
+                  <div className={classNames(projectcss.all, projectcss.__wab_text, sty.text__iwyTo)}>
+                    {'Emphasis:'}
+                  </div>
+                </div>
+              ) : null}
+
+              <Select
+                data-plasmic-name={'emphasis'}
+                data-plasmic-override={overrides.emphasis}
+                className={classNames('__wab_instance', sty.emphasis)}
+                onChange={(...args) => {
+                  p.generateStateOnChangeProp($state, ['emphasis', 'value'])(args[0]);
+                }}
+                value={p.generateStateValueProp($state, ['emphasis', 'value'])}
+              >
+                <Select__Option className={classNames('__wab_instance', sty.option__wHewT)} value={'1' as const}>
+                  {'Option 1'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option___1E34)} value={'2' as const}>
+                  {'Option 2'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__npZ2U)} value={'3' as const}>
+                  {'aswef.djv.hrueb.hir.efwef'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option___1Yakw)} value={'45' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__swQTv)} value={'6' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__kg2Qu)} value={'7' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option___2YRgD)} value={'8' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__h0thT)} value={'9' as const}>
+                  {'Option 4'}
+                </Select__Option>
+              </Select>
+
+              {true ? (
+                <div className={classNames(projectcss.all, sty.freeBox__cZneW)}>
+                  <div className={classNames(projectcss.all, projectcss.__wab_text, sty.text__kNiTs)}>{'State:'}</div>
+                </div>
+              ) : null}
+
+              <Select
+                data-plasmic-name={'state'}
+                data-plasmic-override={overrides.state}
+                className={classNames('__wab_instance', sty.state)}
+                onChange={(...args) => {
+                  p.generateStateOnChangeProp($state, ['state', 'value'])(args[0]);
+                }}
+                value={p.generateStateValueProp($state, ['state', 'value'])}
+              >
+                <Select__Option className={classNames('__wab_instance', sty.option__noeg0)} value={'1' as const}>
+                  {'Option 1'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__zlwp0)} value={'2' as const}>
+                  {'Option 2'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__ycyRm)} value={'3' as const}>
+                  {'aswef.djv.hrueb.hir.efwef'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__xYZuM)} value={'45' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__oh2Yj)} value={'6' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option___8NMlq)} value={'7' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option__sjlvL)} value={'8' as const}>
+                  {'Option 4'}
+                </Select__Option>
+
+                <Select__Option className={classNames('__wab_instance', sty.option___0Nc2X)} value={'9' as const}>
+                  {'Option 4'}
+                </Select__Option>
+              </Select>
             </div>
           </p.Stack>
 
@@ -253,11 +631,41 @@ function PlasmicHomepage__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ['root', 'section', 'theme', 'mode', 'surface', 'button'],
-  section: ['section', 'theme', 'mode', 'surface'],
+  root: [
+    'root',
+    'section',
+    'brand',
+    'product',
+    'platform',
+    'theme',
+    'colorMode',
+    'appearance',
+    'surface',
+    'emphasis',
+    'state',
+    'button',
+  ],
+  section: [
+    'section',
+    'brand',
+    'product',
+    'platform',
+    'theme',
+    'colorMode',
+    'appearance',
+    'surface',
+    'emphasis',
+    'state',
+  ],
+  brand: ['brand'],
+  product: ['product'],
+  platform: ['platform'],
   theme: ['theme'],
-  mode: ['mode'],
+  colorMode: ['colorMode'],
+  appearance: ['appearance'],
   surface: ['surface'],
+  emphasis: ['emphasis'],
+  state: ['state'],
   button: ['button'],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -265,9 +673,15 @@ type DescendantsType<T extends NodeNameType> = typeof PlasmicDescendants[T][numb
 type NodeDefaultElementType = {
   root: 'div';
   section: 'section';
+  brand: typeof Select;
+  product: typeof Select;
+  platform: typeof Select;
   theme: typeof Select;
-  mode: typeof Select;
+  colorMode: typeof Select;
+  appearance: typeof Select;
   surface: typeof Select;
+  emphasis: typeof Select;
+  state: typeof Select;
   button: typeof Button;
 };
 
@@ -323,9 +737,15 @@ export const PlasmicHomepage = Object.assign(
   {
     // Helper components rendering sub-elements
     section: makeNodeComponent('section'),
+    brand: makeNodeComponent('brand'),
+    product: makeNodeComponent('product'),
+    platform: makeNodeComponent('platform'),
     theme: makeNodeComponent('theme'),
-    mode: makeNodeComponent('mode'),
+    colorMode: makeNodeComponent('colorMode'),
+    appearance: makeNodeComponent('appearance'),
     surface: makeNodeComponent('surface'),
+    emphasis: makeNodeComponent('emphasis'),
+    state: makeNodeComponent('state'),
     button: makeNodeComponent('button'),
 
     // Metadata about props expected for PlasmicHomepage
