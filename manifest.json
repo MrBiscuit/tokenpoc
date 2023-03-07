@@ -1,0 +1,12 @@
+{
+  "name": "TokenPOC",
+  "id": "1210915615580881819",
+  "api": "1.0.0",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": [
+    "figma"
+  ],
+  "main": "dist/code.js",
+  "ui": "dist/ui.html"
+}

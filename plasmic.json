@@ -1,5 +1,5 @@
 {
-  "platform": "nextjs",
+  "platform": "react",
   "code": {
     "lang": "ts",
     "scheme": "blackbox",
@@ -10,15 +10,15 @@
     "defaultStyleCssFilePath": "plasmic/plasmic__default_style.module.css"
   },
   "images": {
-    "scheme": "public-files",
+    "scheme": "inlined",
     "publicDir": "../public",
-    "publicUrlPrefix": "/"
+    "publicUrlPrefix": "/static/"
   },
   "tokens": {
     "scheme": "theo",
     "tokensFilePath": "plasmic-tokens.theo.json"
   },
-  "srcDir": "components",
+  "srcDir": "src/components",
   "defaultPlasmicDir": "./plasmic",
   "projects": [
     {
@@ -26,18 +26,18 @@
       "projectApiToken": "2QkYEAgethRP3MdKZUGoW0WV5WNpEJvocj7TAqSc9UwRdrAHdjB2MmQf24QVbQlWUqyhWSRgMgS9gWyKtHeA",
       "projectName": "TokensPOCPlugin",
       "version": "latest",
-      "cssFilePath": "plasmic/blank_project/plasmic_blank_project.module.css",
+      "cssFilePath": "plasmic/tokens_poc_plugin/plasmic_tokens_poc_plugin.module.css",
       "components": [
         {
           "id": "-Ka_gvZbo3br",
           "name": "Homepage",
           "type": "managed",
           "projectId": "2z5rPdFHZr7bZiak9bFJHw",
-          "renderModuleFilePath": "plasmic/blank_project/PlasmicHomepage.tsx",
+          "renderModuleFilePath": "plasmic/tokens_poc_plugin/PlasmicHomepage.tsx",
           "importSpec": {
-            "modulePath": "../pages/index.tsx"
+            "modulePath": "Homepage.tsx"
           },
-          "cssFilePath": "plasmic/blank_project/PlasmicHomepage.module.css",
+          "cssFilePath": "plasmic/tokens_poc_plugin/PlasmicHomepage.module.css",
           "scheme": "blackbox",
           "componentType": "page"
         },
@@ -46,11 +46,11 @@
           "name": "Select",
           "type": "managed",
           "projectId": "2z5rPdFHZr7bZiak9bFJHw",
-          "renderModuleFilePath": "plasmic/blank_project/PlasmicSelect.tsx",
+          "renderModuleFilePath": "plasmic/tokens_poc_plugin/PlasmicSelect.tsx",
           "importSpec": {
             "modulePath": "Select.tsx"
           },
-          "cssFilePath": "plasmic/blank_project/PlasmicSelect.module.css",
+          "cssFilePath": "plasmic/tokens_poc_plugin/PlasmicSelect.module.css",
           "scheme": "blackbox",
           "componentType": "component",
           "plumeType": "select"
@@ -60,11 +60,11 @@
           "name": "Select__Option",
           "type": "managed",
           "projectId": "2z5rPdFHZr7bZiak9bFJHw",
-          "renderModuleFilePath": "plasmic/blank_project/PlasmicSelect__Option.tsx",
+          "renderModuleFilePath": "plasmic/tokens_poc_plugin/PlasmicSelect__Option.tsx",
           "importSpec": {
             "modulePath": "Select__Option.tsx"
           },
-          "cssFilePath": "plasmic/blank_project/PlasmicSelect__Option.module.css",
+          "cssFilePath": "plasmic/tokens_poc_plugin/PlasmicSelect__Option.module.css",
           "scheme": "blackbox",
           "componentType": "component",
           "plumeType": "select-option"
@@ -74,11 +74,11 @@
           "name": "Select__OptionGroup",
           "type": "managed",
           "projectId": "2z5rPdFHZr7bZiak9bFJHw",
-          "renderModuleFilePath": "plasmic/blank_project/PlasmicSelect__OptionGroup.tsx",
+          "renderModuleFilePath": "plasmic/tokens_poc_plugin/PlasmicSelect__OptionGroup.tsx",
           "importSpec": {
             "modulePath": "Select__OptionGroup.tsx"
           },
-          "cssFilePath": "plasmic/blank_project/PlasmicSelect__OptionGroup.module.css",
+          "cssFilePath": "plasmic/tokens_poc_plugin/PlasmicSelect__OptionGroup.module.css",
           "scheme": "blackbox",
           "componentType": "component",
           "plumeType": "select-option-group"
@@ -88,11 +88,11 @@
           "name": "Select__Overlay",
           "type": "managed",
           "projectId": "2z5rPdFHZr7bZiak9bFJHw",
-          "renderModuleFilePath": "plasmic/blank_project/PlasmicSelect__Overlay.tsx",
+          "renderModuleFilePath": "plasmic/tokens_poc_plugin/PlasmicSelect__Overlay.tsx",
           "importSpec": {
             "modulePath": "Select__Overlay.tsx"
           },
-          "cssFilePath": "plasmic/blank_project/PlasmicSelect__Overlay.module.css",
+          "cssFilePath": "plasmic/tokens_poc_plugin/PlasmicSelect__Overlay.module.css",
           "scheme": "blackbox",
           "componentType": "component",
           "plumeType": "triggered-overlay"
@@ -116,22 +116,22 @@
         {
           "id": "K4AXeW9I9A",
           "name": "IconIcon",
-          "moduleFilePath": "plasmic/blank_project/icons/PlasmicIcon__Icon.tsx"
+          "moduleFilePath": "plasmic/tokens_poc_plugin/icons/PlasmicIcon__Icon.tsx"
         },
         {
           "id": "8x8W_6AMAu",
           "name": "Icon2Icon",
-          "moduleFilePath": "plasmic/blank_project/icons/PlasmicIcon__Icon2.tsx"
+          "moduleFilePath": "plasmic/tokens_poc_plugin/icons/PlasmicIcon__Icon2.tsx"
         },
         {
           "id": "H25cevz1Q0a",
           "name": "ChevronDownsvgIcon",
-          "moduleFilePath": "plasmic/blank_project/icons/PlasmicIcon__ChevronDownsvg.tsx"
+          "moduleFilePath": "plasmic/tokens_poc_plugin/icons/PlasmicIcon__ChevronDownsvg.tsx"
         },
         {
           "id": "EyvRYwpgc9-",
           "name": "ChevronUpsvgIcon",
-          "moduleFilePath": "plasmic/blank_project/icons/PlasmicIcon__ChevronUpsvg.tsx"
+          "moduleFilePath": "plasmic/tokens_poc_plugin/icons/PlasmicIcon__ChevronUpsvg.tsx"
         },
         {
           "id": "_flsZuGE13Q",
@@ -167,14 +167,11 @@
         "id": "iKIDAJ68PBA6i",
         "name": "Screen",
         "projectId": "2z5rPdFHZr7bZiak9bFJHw",
-        "contextFilePath": "plasmic/blank_project/PlasmicGlobalVariant__Screen.tsx"
+        "contextFilePath": "plasmic/tokens_poc_plugin/PlasmicGlobalVariant__Screen.tsx"
       }
     ]
   },
   "wrapPagesWithGlobalContexts": true,
-  "nextjsConfig": {
-    "pagesDir": "../pages"
-  },
   "cliVersion": "0.1.214",
   "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.214/dist/plasmic.schema.json"
 }

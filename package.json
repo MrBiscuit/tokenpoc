@@ -1,30 +1,45 @@
 {
-  "name": "tokenpoc",
-  "version": "0.1.0",
-  "private": true,
+  "name": "figma-plugin-react-template",
+  "version": "1.0.0",
+  "description": "This plugin template uses Typescript. If you are familiar with Javascript, Typescript will look very familiar. In fact, valid Javascript code is already valid Typescript code.",
+  "license": "ISC",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "webpack --mode=production",
+    "build:watch": "webpack --mode=development --watch",
+    "prettier:format": "prettier --write '**/*.{js,jsx,ts,tsx,css,json}' "
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "^2.2.0",
-    "@plasmicapp/cli": "^0.1.213",
-    "@plasmicapp/host": "^1.0.106",
-    "@plasmicapp/react-web": "^0.2.158",
-    "next": "13.1.6",
-    "preact": "^10.12.1",
-    "preact-compat": "^3.19.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "@plasmicapp/host": "^1.0.107",
+    "@plasmicapp/react-web": "^0.2.159",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/node": "18.14.0",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11",
-    "eslint": "8.34.0",
-    "eslint-config-next": "13.1.6",
-    "typescript": "4.9.5"
+    "@figma/plugin-typings": "^1.50.0",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "react-dev-utils": "^12.0.1",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,css,json}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

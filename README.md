@@ -1,25 +1,23 @@
-This is a Next.js project bootstrapped with [`create-plasmic-app`](https://www.npmjs.com/package/create-plasmic-app).
+# Figma Plugin React Template
 
-## Getting Started
+![62862431-71537f00-bd0e-11e9-85db-d97c0fb729a4](https://user-images.githubusercontent.com/16322616/62862692-46b5f600-bd0f-11e9-93b0-75955d1de8f3.png)
 
-First, run the development server:
+This template contains the react example as shown on [Figma Docs](https://www.figma.com/plugin-docs/intro/), with some structural changes and extra tooling.
 
-```bash
-yarn dev
-```
+## Quickstart
 
-Open your browser to see the result.
+- Run `yarn` to install dependencies.
+- Run `yarn build:watch` to start webpack in watch mode.
+- Open `Figma` -> `Plugins` -> `Development` -> `Import plugin from manifest...` and choose `manifest.json` file from this repo.
 
-You can start editing your project in Plasmic Studio. The page auto-updates as you edit the project.
+⭐ To change the UI of your plugin (the react code), start editing [App.tsx](./src/app/components/App.tsx).  
+⭐ To interact with the Figma API edit [controller.ts](./src/plugin/controller.ts).  
+⭐ Read more on the [Figma API Overview](https://www.figma.com/plugin-docs/api/api-overview/).
 
-## Learn More
+## Toolings
 
-With Plasmic, you can enable non-developers on your team to publish pages and content into your website or app.
+This repo is using:
 
-To learn more about Plasmic, take a look at the following resources:
-
-- [Plasmic Website](https://www.plasmic.app/)
-- [Plasmic Documentation](https://docs.plasmic.app/learn/)
-- [Plasmic Slack Community](https://www.plasmic.app/slack)
-
-You can check out [the Plasmic GitHub repository](https://github.com/plasmicapp/plasmic) - your feedback and contributions are welcome!
+- React + Webpack
+- TypeScript
+- Prettier precommit hook
