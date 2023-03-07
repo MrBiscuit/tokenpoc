@@ -9,7 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@create-figma-plugin/ui": "^2.2.0",
+    "@plasmicapp/cli": "^0.1.213",
+    "@plasmicapp/host": "^1.0.106",
+    "@plasmicapp/react-web": "^0.2.158",
     "next": "13.1.6",
+    "preact": "^10.12.1",
+    "preact-compat": "^3.19.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
